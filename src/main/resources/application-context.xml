@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+          http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <camel:camelContext id="camel-client">
+        <camel:routeBuilder ref="myDb1" />
+        <camel:routeBuilder ref="myDb2" />
+    </camel:camelContext>
+
+    <bean id="myDb" class="com.mongodb.Mongo">
+        <constructor-arg index="0" value="localhost" />
+    </bean>
+    <bean id="mongodb" class="org.apache.camel.component.mongodb.MongoDbComponent"></bean>
+    <bean id="myDb1" class="com.java.camel.MyRoute1">
+    </bean>
+    <bean id="myDb2" class="com.java.camel.MyRoute2">
+    </bean>
+</beans>
